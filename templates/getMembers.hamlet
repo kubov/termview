@@ -5,4 +5,5 @@
 <ul>
   $forall (name,count) <- members
     <li>
-      <a href="@{EntriesOfR name}">#{name} (#{count})
+      <a href="@{EntriesOfR name}">#{name}
+      (#{count} entries)
