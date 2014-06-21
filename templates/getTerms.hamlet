@@ -1,0 +1,9 @@
+<h3>#{term}
+<h4>
+  <a href=@{HomeR}>back
+
+<table>
+  $forall (by,text) <- entires
+    <tr>
+      <td>#{by}
+      <td><b>#{text}

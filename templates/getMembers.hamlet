@@ -1,0 +1,8 @@
+<h2>Entries of
+<h4>
+  <a href="@{HomeR}">back
+
+<ul>
+  $forall (name,count) <- members
+    <li>
+      <a href="@{EntriesOfR name}">#{name} (#{count})

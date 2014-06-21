@@ -1,0 +1,8 @@
+<h3>Termview
+<h4>
+  <a href="@{MembersR}">entries of members
+
+<ul>
+  $forall (name,count) <- terms
+    <li>
+      <a href="@{TermsR name}">#{name} (#{count})

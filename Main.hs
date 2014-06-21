@@ -10,7 +10,7 @@ data TermView = TermView
 
 mkYesod "TermView" [parseRoutes|
 / HomeR GET
-/term/#String TermR GET
+/terms/#String TermsR GET
 /members/ MembersR GET
 /entriesof/#String EntriesOfR GET
 |]
@@ -20,55 +20,22 @@ instance Yesod TermView
 getHomeR :: Handler Html
 getHomeR = do
   terms <- liftIO getTerms
-  defaultLayout [whamlet|
-                 <h2>termview
-                 <h4><a href="@{MembersR}">check entries of members
-                 <ul>
-                   $forall (name,count) <- terms
-                           <li><a href="@{TermR name}">#{name} (#{count})
-                 |]
+  defaultLayout $(whamletFile "templates/homepage.hamlet")
 
-getTermR :: String -> Handler Html
-getTermR term = do
+getTermsR :: String -> Handler Html
+getTermsR term = do
   entires <- liftIO $ getEntries term
-  defaultLayout [whamlet|
-                 <h3>#{term}
-
-                 <table>
-                   <tr>
-                   $forall (by,text) <- entires
-                     <tr>
-                       <td>#{by}
-                       <td><b>#{text}
-
-                 <h4><a href="@{HomeR}">home
-               |]
+  defaultLayout $(whamletFile "templates/getTerms.hamlet")
 
 getMembersR :: Handler Html
 getMembersR = do
   members <- liftIO getMembers
-  defaultLayout [whamlet|
-                 <h2>Entries of
-                 <h4><a href="@{HomeR}">home
-                 <ul>
-                   $forall (name,count) <- members
-                           <li><a href="@{EntriesOfR name}">#{name} (#{count})
-                 |]
+  defaultLayout $(whamletFile "templates/getMembers.hamlet")
 
 getEntriesOfR :: String -> Handler Html
 getEntriesOfR term = do
   entires <- liftIO $ getEntriesOf term
-  defaultLayout [whamlet|
-                 <h3>#{term} added
-                 <table>
-                   <tr>
-                   $forall (by,text) <- entires
-                     <tr>
-                       <td>#{by}
-                       <td><b>#{text}
-
-                 <h4><a href="@{MembersR}">home
-               |]
+  defaultLayout $(whamletFile "templates/getEntriesOf.hamlet")
 
 main :: IO ()
 main = warp 3000 TermView

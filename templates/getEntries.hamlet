@@ -1,0 +1,9 @@
+<h3>#{term} added
+<h4>
+  <a href="@{MembersR}">back
+
+<table>
+  $forall (by,text) <- entires
+    <tr>
+      <td>#{by}
+      <td><b>#{text}
