@@ -6,16 +6,16 @@ module Main where
 import Yesod
 import KlaczDB
 
-data HelloWorld = HelloWorld
+data TermView = TermView
 
-mkYesod "HelloWorld" [parseRoutes|
+mkYesod "TermView" [parseRoutes|
 / HomeR GET
 /term/#String TermR GET
 /members/ MembersR GET
 /entriesof/#String EntriesOfR GET
 |]
 
-instance Yesod HelloWorld
+instance Yesod TermView
 
 getHomeR :: Handler Html
 getHomeR = do
@@ -71,4 +71,4 @@ getEntriesOfR term = do
                |]
 
 main :: IO ()
-main = warp 3000 HelloWorld
+main = warp 3000 TermView
