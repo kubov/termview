@@ -19,7 +19,7 @@ instance Yesod HelloWorld
 
 getHomeR :: Handler Html
 getHomeR = do
-  terms <- liftIO $ getTerms
+  terms <- liftIO getTerms
   defaultLayout [whamlet|
                  <h2>termview
                  <h4><a href="@{MembersR}">check entries of members

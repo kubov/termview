@@ -19,14 +19,10 @@ queryPair query params = do
   return (map unwrap vals) where
     unwrap [f, s] = (fromSql f, fromSql s)
 
-getTerms :: IO [(String,String)]
+getTerms, getMembers :: IO [(String,String)]
 getTerms = queryPair getTermsQuery []
-      
-getEntries :: String -> IO [(String, String)]
-getEntries term = queryPair getEntriesQuery [toSql term]
-
-getMembers :: IO [(String,String)]
 getMembers = queryPair getMembersQuery []
 
-getEntriesOf :: String -> IO [(String, String)]
+getEntriesOf, getEntries :: String -> IO [(String, String)]
+getEntries term = queryPair getEntriesQuery [toSql term]
 getEntriesOf term = queryPair getEntriesOfQuery [toSql term]
